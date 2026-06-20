@@ -1,231 +1,207 @@
 <!DOCTYPE html>
-<html lang="en" data-mood="pcc" data-mode="editorial">
+<html lang="en" data-mood="pcc-warm">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PCC — your agent can do real things now</title>
   <meta name="description" content="Tell your agent what you want. It composes verified real-world capabilities — and proves every step. The capability network." />
 
-  <!-- Monument (Space Grotesk) + Swiss (Inter). type IS the art. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet" />
+  <!-- Calistoga (warm display) + Inter (body) + JetBrains Mono (labels) — the DB's warm tri-stack -->
+  <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     /* ============================================================
-       PCC — capability.network
-       Composed from the Controlled Chaos design system
-       (tokens/voices/motion) with a custom `pcc` mood.
-       Axioms: I. Hierarchy is the job  II. Tension is beauty
-               III. The medium is time
+       PCC — capability.network  ·  WARM v2
+       Palette from ui-ux-pro-max (warm terracotta + cream + pine).
+       Type: Calistoga ("adds human warmth") + Inter + JetBrains Mono.
+       Axioms (controlledchaos): hierarchy · tension · time.
        ============================================================ */
-
-    /* ---- RESET ---- */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    img, svg { display: block; max-width: 100%; }
+    svg, img { display: block; max-width: 100%; }
 
-    /* ---- TOKENS ---- */
     :root {
-      /* type scale — non-linear, the violence between massive & body is the design */
-      --type-massive:  clamp(3.25rem, 9vw + 0.5rem, 11rem);
-      --type-display:  clamp(2.25rem, 5vw + 0.5rem, 5.5rem);
-      --type-headline: clamp(1.6rem, 3vw + 0.4rem, 3rem);
-      --type-subhead:  clamp(1.05rem, 1.3vw + 0.3rem, 1.45rem);
-      --type-body:     clamp(0.95rem, 0.4vw + 0.8rem, 1.1rem);
-      --type-caption:  clamp(0.7rem, 0.3vw + 0.55rem, 0.8rem);
+      /* ---- WARM PALETTE ---- */
+      --bg:        #F6EEDF;   /* warm cream */
+      --bg-2:      #F0E1C9;   /* deeper cream (gradient) */
+      --bg-3:      #F3E7D2;
+      --card:      #FBF6EC;   /* card cream */
+      --ink:       #2A1E15;   /* warm espresso (not black) */
+      --ink-soft:  #6A5848;   /* warm taupe text */
+      --terra:     #B8472A;   /* terracotta — primary */
+      --terra-dk:  #93351E;
+      --ochre:     #D98A2B;   /* amber/ochre — accent / discord */
+      --ochre-lt:  #ECC079;
+      --pine:      #2E5A4C;   /* fresh-green counter, deepened */
+      --line:      #2a1e1518;
+      --line-2:    #2a1e1530;
 
-      --tracking-tight: -0.03em; --tracking-snug: -0.015em;
-      --tracking-wide: 0.06em;  --tracking-widest: 0.2em;
-      --leading-crush: 0.9; --leading-snug: 1.08; --leading-normal: 1.55;
+      /* ---- TYPE ---- */
+      --display: 'Calistoga', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+      --t-massive: clamp(3.1rem, 8vw + 0.5rem, 9.5rem);
+      --t-display: clamp(2.1rem, 4.5vw + 0.5rem, 4.75rem);
+      --t-head:    clamp(1.6rem, 2.6vw + 0.4rem, 2.7rem);
+      --t-sub:     clamp(1.1rem, 1.2vw + 0.4rem, 1.45rem);
+      --t-body:    clamp(1rem, 0.4vw + 0.85rem, 1.12rem);
+      --t-label:   0.74rem;
 
-      --font-monument: 'Space Grotesk', system-ui, sans-serif;
-      --font-swiss: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-
-      /* spacing */
-      --space-xs: clamp(0.5rem, 0.3vw + 0.4rem, 0.75rem);
-      --space-s:  clamp(0.75rem, 0.5vw + 0.5rem, 1rem);
-      --space-m:  clamp(1rem, 1vw + 0.5rem, 1.5rem);
-      --space-l:  clamp(1.5rem, 2vw + 0.5rem, 2.5rem);
-      --space-xl: clamp(2.5rem, 4vw + 0.5rem, 5rem);
-      --space-2xl: clamp(4rem, 7vw + 1rem, 9rem);
-      --gutter: clamp(1.25rem, 4vw, 4rem);
-      --maxw: 1600px;
-
-      /* motion */
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-snap: cubic-bezier(0.7, 0, 0.3, 1);
-      --dur-swift: 350ms; --dur-flow: 650ms; --dur-drift: 1100ms; --dur-breathe: 2600ms;
-
-      /* ---- MOOD: PCC — bright paper, electric blue, signal-orange discord ---- */
-      --bg:       #FAFAF7;
-      --fg:       #0A0A0A;
-      --accent:   #1B2BFF;  /* electric blue — primary, "do" */
-      --discord:  #FF4D1C;  /* signal orange — the one that doesn't belong, "offer" */
-      --muted:    #6B6B66;
-      --subtle:   #ECECE6;
-      --line:     #15151333;
-      --line-solid:#151513;
+      /* ---- SPACE / MOTION ---- */
+      --gutter: clamp(1.25rem, 4vw, 4.5rem);
+      --maxw: 1480px;
+      --sp-s: clamp(.75rem,.5vw + .5rem,1rem);
+      --sp-m: clamp(1rem,1vw + .5rem,1.6rem);
+      --sp-l: clamp(1.75rem,2.5vw + .5rem,3rem);
+      --sp-xl: clamp(3rem,5vw + .5rem,6rem);
+      --sp-2xl: clamp(4.5rem,8vw + 1rem,10rem);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --r: 18px; --r-lg: 26px; --r-pill: 100px;
     }
 
     body {
-      background: var(--bg); color: var(--fg);
-      font-family: var(--font-swiss); font-weight: 400;
-      line-height: var(--leading-normal);
+      font-family: var(--sans); color: var(--ink); line-height: 1.6;
+      background:
+        radial-gradient(120% 80% at 78% -8%, #F8DFB8 0%, transparent 46%),
+        radial-gradient(100% 70% at 0% 8%, #F4E3CB 0%, transparent 40%),
+        linear-gradient(176deg, var(--bg) 0%, var(--bg-3) 60%, var(--bg-2) 100%);
+      background-attachment: fixed;
       -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
-    ::selection { background: var(--accent); color: var(--bg); }
-
-    /* grain — subtle materiality */
-    body::after {
-      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
-      opacity: 0.04; mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    body::after {  /* warm grain */
+      content:''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      opacity: .05; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
+    ::selection { background: var(--terra); color: var(--bg); }
+    a { color: inherit; }
 
-    /* ---- VOICES ---- */
-    .voice-monument { font-family: var(--font-monument); font-weight: 700; letter-spacing: var(--tracking-tight); line-height: var(--leading-crush); }
-    .label { font-family: var(--font-swiss); font-size: var(--type-caption); font-weight: 500; letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--muted); }
+    .label { font-family: var(--mono); font-size: var(--t-label); font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--terra); }
 
     /* ---- TOP BAR ---- */
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: var(--space-m) var(--gutter); position: sticky; top: 0; z-index: 100;
-      background: color-mix(in srgb, var(--bg) 82%, transparent);
-      backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
-    }
-    .brand { font-family: var(--font-monument); font-weight: 700; font-size: 1.15rem; letter-spacing: var(--tracking-snug); }
-    .brand b { color: var(--accent); }
-    .nav { display: flex; gap: var(--space-l); align-items: center; }
-    .nav a { color: var(--fg); text-decoration: none; font-size: var(--type-caption); letter-spacing: var(--tracking-wide); text-transform: uppercase; opacity: 0.7; transition: opacity var(--dur-swift); }
+    .topbar { display: flex; align-items: center; justify-content: space-between;
+      padding: var(--sp-m) var(--gutter); position: sticky; top: 0; z-index: 100;
+      background: color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter: blur(12px) saturate(1.2);
+      border-bottom: 1px solid var(--line); }
+    .brand { font-family: var(--display); font-size: 1.35rem; color: var(--ink); }
+    .brand i { color: var(--terra); font-style: normal; }
+    .nav { display: flex; gap: var(--sp-l); align-items: center; }
+    .nav a { font-family: var(--mono); font-size: var(--t-label); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; opacity: .65; transition: opacity .3s; }
     .nav a:hover { opacity: 1; }
-    .nav .dev { font-family: var(--font-monument); opacity: 0.45; }
+    .nav .dev { color: var(--ink-soft); }
 
-    /* ---- HERO — asymmetric: type left, mesh right ---- */
-    .hero {
-      display: grid; grid-template-columns: 1.35fr 1fr; align-items: center;
-      gap: var(--space-l); min-height: 86vh;
-      padding: var(--space-xl) var(--gutter) var(--space-2xl);
-      max-width: var(--maxw); margin-inline: auto;
-    }
-    .hero-h1 {
-      font-family: var(--font-monument); font-weight: 700;
-      font-size: var(--type-massive); line-height: 0.92; letter-spacing: var(--tracking-tight);
-      max-width: 14ch;
-    }
-    .hero-h1 .em { color: var(--accent); }
-    .hero-h1 .blk { display: inline-block; width: 0.55em; height: 0.55em; background: var(--discord); margin-left: 0.08em; vertical-align: baseline; transform: translateY(0.02em); }
-    .hero-sub { font-size: var(--type-subhead); color: var(--muted); max-width: 44ch; margin-top: var(--space-l); line-height: var(--leading-snug); }
-    .hero-sub b { color: var(--fg); font-weight: 600; }
+    /* ---- HERO ---- */
+    .hero { display: grid; grid-template-columns: 1.25fr 1fr; align-items: center; gap: var(--sp-l);
+      max-width: var(--maxw); margin-inline: auto; padding: var(--sp-xl) var(--gutter) var(--sp-2xl); min-height: 82vh; }
+    .hero h1 { font-family: var(--display); font-weight: 400; font-size: var(--t-massive); line-height: .98;
+      letter-spacing: -.005em; color: var(--ink); max-width: 13ch; }
+    .hero h1 .t { color: var(--terra); }
+    .hero h1 .dot { color: var(--ochre); }
+    .hero .sub { font-size: var(--t-sub); color: var(--ink-soft); max-width: 42ch; margin-top: var(--sp-m); line-height: 1.45; }
+    .hero .sub b { color: var(--ink); font-weight: 600; }
 
-    /* doors */
-    .doors { display: flex; gap: var(--space-s); margin-top: var(--space-l); flex-wrap: wrap; }
-    .door {
-      font-family: var(--font-swiss); font-size: 1.02rem; font-weight: 600; letter-spacing: var(--tracking-snug);
-      padding: 0.95em 1.6em; border: none; cursor: pointer; text-decoration: none; color: var(--bg);
-      display: inline-flex; align-items: center; gap: 0.6em;
-      transition: transform var(--dur-swift) var(--ease-out-expo), box-shadow var(--dur-swift);
-    }
-    .door .arr { transition: transform var(--dur-swift) var(--ease-out-expo); }
-    .door:hover { transform: translateY(-3px); }
-    .door:hover .arr { transform: translateX(4px); }
-    .door--do    { background: var(--accent); box-shadow: 0 6px 0 color-mix(in srgb, var(--accent) 55%, #000); }
-    .door--offer { background: var(--discord); box-shadow: 0 6px 0 color-mix(in srgb, var(--discord) 55%, #000); }
-    .door--do:hover    { box-shadow: 0 9px 0 color-mix(in srgb, var(--accent) 55%, #000); }
-    .door--offer:hover { box-shadow: 0 9px 0 color-mix(in srgb, var(--discord) 55%, #000); }
+    .doors { display: flex; gap: var(--sp-s); margin-top: var(--sp-l); flex-wrap: wrap; }
+    .btn { font-family: var(--sans); font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em;
+      padding: .95em 1.7em; border: none; border-radius: var(--r-pill); cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .55em; transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+    .btn .arr { transition: transform .35s var(--ease); }
+    .btn:hover { transform: translateY(-3px); } .btn:hover .arr { transform: translateX(5px); }
+    .btn--do { background: var(--terra); color: #fff; box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--terra) 65%, transparent); }
+    .btn--do:hover { box-shadow: 0 16px 34px -8px color-mix(in srgb, var(--terra) 65%, transparent); }
+    .btn--offer { background: var(--pine); color: #fff; box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--pine) 60%, transparent); }
+    .btn--offer:hover { box-shadow: 0 16px 34px -8px color-mix(in srgb, var(--pine) 60%, transparent); }
 
-    /* ---- CAPABILITY MESH (hero art) ---- */
-    .mesh-wrap { position: relative; aspect-ratio: 1 / 1; width: 100%; }
-    .mesh { width: 100%; height: 100%; overflow: visible; }
-    .mesh-edge { stroke: var(--line-solid); stroke-width: 1; opacity: 0.18; }
-    .mesh-edge.hot {
-      stroke: var(--accent); stroke-width: 2; opacity: 1;
-      stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
-      animation: draw var(--dur-drift) var(--ease-out-expo) forwards;
-    }
-    .mesh-node { fill: var(--bg); stroke: var(--line-solid); stroke-width: 1.5; }
-    .mesh-node.hot { stroke: var(--accent); fill: var(--accent); animation: pop var(--dur-swift) var(--ease-snap) both; }
-    .mesh-node.agent { fill: var(--fg); stroke: var(--fg); }
-    .mesh-node.verified { stroke: var(--discord); fill: var(--discord); }
-    .mesh-pulse { fill: none; stroke: var(--accent); stroke-width: 1.5; opacity: 0; transform-origin: center; animation: pulse var(--dur-breathe) var(--ease-out-expo) infinite; }
-    .mesh-lbl { font-family: var(--font-monument); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--muted); }
+    /* ---- HERO ART: warm capability bloom ---- */
+    .bloom { width: 100%; aspect-ratio: 1; max-width: 540px; margin-inline: auto; overflow: visible; }
+    .thread { fill: none; stroke: url(#warm); stroke-width: 2; stroke-linecap: round; opacity: .55; }
+    .thread.hot { stroke-width: 3; opacity: 1; filter: url(#glow);
+      stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: draw 1.6s var(--ease) forwards; }
+    .nd { fill: var(--card); stroke: var(--terra); stroke-width: 2; }
+    .nd.core { fill: var(--ink); stroke: var(--ink); }
+    .nd.amber { fill: var(--ochre); stroke: var(--ochre); }
+    .nd.glowing { filter: url(#glow); }
+    .ring { fill: none; stroke: var(--terra); stroke-width: 1.5; opacity: 0; transform-origin: center; animation: pulse 3s var(--ease) infinite; }
+    .blbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; fill: var(--ink-soft); }
     @keyframes draw { to { stroke-dashoffset: 0; } }
-    @keyframes pop  { 0% { transform: scale(0); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
-    @keyframes pulse { 0% { r: 6; opacity: 0.5; } 100% { r: 46; opacity: 0; } }
+    @keyframes pulse { 0% { r: 8; opacity: .45; } 100% { r: 64; opacity: 0; } }
 
-    /* ---- SECTION FRAME ---- */
-    .section { max-width: var(--maxw); margin-inline: auto; padding: var(--space-2xl) var(--gutter); border-top: 1px solid var(--line); }
-    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-m); margin-bottom: var(--space-xl); flex-wrap: wrap; }
-    .section-head h2 { font-family: var(--font-monument); font-weight: 700; font-size: var(--type-display); letter-spacing: var(--tracking-tight); line-height: var(--leading-crush); max-width: 16ch; }
+    /* ---- SECTIONS ---- */
+    .wrap { max-width: var(--maxw); margin-inline: auto; padding: var(--sp-2xl) var(--gutter); }
+    .head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-m); margin-bottom: var(--sp-l); flex-wrap: wrap; }
+    .head h2 { font-family: var(--display); font-weight: 400; font-size: var(--t-display); line-height: 1; color: var(--ink); max-width: 16ch; }
 
-    /* ---- LIVE DEMO ---- */
-    .demo { background: var(--fg); color: var(--bg); border-radius: 2px; padding: var(--space-xl); }
-    .demo .label { color: color-mix(in srgb, var(--bg) 60%, transparent); }
-    .intent-bar { display: flex; align-items: center; gap: var(--space-s); margin: var(--space-m) 0 var(--space-l); border-bottom: 2px solid var(--accent); padding-bottom: var(--space-s); }
-    .intent-q { font-family: var(--font-monument); font-size: clamp(1.3rem, 2.5vw, 2.2rem); font-weight: 500; color: var(--bg); }
-    .intent-q .cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
+    /* live demo card */
+    .demo { background: var(--ink); color: var(--bg); border-radius: var(--r-lg); padding: var(--sp-xl);
+      box-shadow: 0 30px 60px -28px color-mix(in srgb, var(--ink) 55%, transparent); }
+    .demo .label { color: var(--ochre-lt); }
+    .intent { display: flex; align-items: center; gap: var(--sp-s); margin: var(--sp-s) 0 var(--sp-l);
+      border-bottom: 2px solid var(--ochre); padding-bottom: var(--sp-s); }
+    .intent .q { font-family: var(--display); font-size: clamp(1.35rem, 2.6vw, 2.3rem); color: var(--bg); }
+    .intent .cur { display: inline-block; width: 2px; height: 1em; background: var(--ochre); vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
     @keyframes blink { 50% { opacity: 0; } }
-    .chain { display: flex; align-items: center; gap: var(--space-s); flex-wrap: wrap; font-family: var(--font-monument); font-size: var(--type-caption); letter-spacing: 0.06em; text-transform: uppercase; }
-    .step { display: inline-flex; align-items: center; gap: 0.5em; padding: 0.5em 0.9em; border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); opacity: 0.25; transition: opacity var(--dur-swift) var(--ease-out-expo), border-color var(--dur-swift); }
-    .step.on { opacity: 1; border-color: var(--accent); }
-    .step.done { border-color: var(--discord); }
-    .step .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-    .chain .sep { opacity: 0.3; }
+    .chain { display: flex; align-items: center; gap: var(--sp-s); flex-wrap: wrap; font-family: var(--mono); font-size: var(--t-label); letter-spacing: .08em; text-transform: uppercase; }
+    .step { display: inline-flex; align-items: center; gap: .5em; padding: .55em .95em; border: 1px solid #ffffff22; border-radius: var(--r-pill); opacity: .28; transition: opacity .4s var(--ease), border-color .4s, background .4s; }
+    .step .d { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .step.on { opacity: 1; border-color: var(--ochre); }
+    .step.done { opacity: 1; border-color: #fff; background: #ffffff10; }
+    .chain .s { opacity: .35; }
 
-    /* ---- TWO PATHS ---- */
-    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
-    .path { background: var(--bg); padding: var(--space-xl); }
-    .path .tag { display: inline-block; font-family: var(--font-monument); font-size: var(--type-caption); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; padding: 0.35em 0.7em; color: var(--bg); margin-bottom: var(--space-m); }
-    .path--do .tag { background: var(--accent); }
-    .path--offer .tag { background: var(--discord); }
-    .path h3 { font-family: var(--font-monument); font-weight: 700; font-size: var(--type-headline); letter-spacing: var(--tracking-snug); line-height: var(--leading-snug); margin-bottom: var(--space-s); }
-    .path p { color: var(--muted); max-width: 42ch; margin-bottom: var(--space-m); }
-    .steps { list-style: none; display: flex; flex-direction: column; gap: var(--space-s); }
-    .steps li { display: flex; gap: var(--space-s); align-items: baseline; font-size: var(--type-body); }
-    .steps .n { font-family: var(--font-monument); font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
-    .path--offer .steps .n { color: var(--discord); }
+    /* two doors */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-m); }
+    .path { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--sp-xl);
+      box-shadow: 0 24px 50px -34px color-mix(in srgb, var(--ink) 40%, transparent); }
+    .tag { display: inline-block; font-family: var(--mono); font-size: var(--t-label); font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; padding: .4em .8em; border-radius: var(--r-pill); color: #fff; margin-bottom: var(--sp-m); }
+    .path--do .tag { background: var(--terra); } .path--offer .tag { background: var(--pine); }
+    .path h3 { font-family: var(--display); font-weight: 400; font-size: var(--t-head); line-height: 1.05; color: var(--ink); margin-bottom: var(--sp-s); }
+    .path p { color: var(--ink-soft); max-width: 42ch; margin-bottom: var(--sp-m); }
+    .steps { list-style: none; display: flex; flex-direction: column; gap: var(--sp-s); }
+    .steps li { display: flex; gap: var(--sp-s); align-items: baseline; font-size: var(--t-body); }
+    .steps .n { font-family: var(--mono); font-weight: 500; color: var(--terra); }
+    .path--offer .steps .n { color: var(--pine); }
 
-    /* ---- VERIFIED BAND ---- */
-    .band { display: grid; grid-template-columns: auto 1fr; gap: var(--space-l); align-items: center; }
-    .band .big { font-family: var(--font-monument); font-weight: 700; font-size: var(--type-massive); line-height: 0.85; letter-spacing: var(--tracking-tight); color: var(--accent); }
-    .band .big .x { color: var(--discord); }
-    .band p { font-size: var(--type-subhead); max-width: 40ch; color: var(--fg); }
+    /* verified band */
+    .band { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-l); align-items: center;
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--sp-xl); }
+    .band .big { font-family: var(--display); font-size: var(--t-massive); line-height: .82; color: var(--terra); }
+    .band .big .x { color: var(--ochre); }
+    .band p { font-size: var(--t-sub); color: var(--ink); max-width: 40ch; line-height: 1.4; }
 
-    /* ---- FOOTER ---- */
-    .footer { max-width: var(--maxw); margin-inline: auto; padding: var(--space-xl) var(--gutter); border-top: 1px solid var(--line-solid); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--space-m); }
-    .footer .big { font-family: var(--font-monument); font-weight: 700; font-size: var(--type-display); letter-spacing: var(--tracking-tight); line-height: 0.9; }
-    .footer .big b { color: var(--accent); }
-    .footer .dev { font-family: var(--font-monument); font-size: var(--type-caption); letter-spacing: var(--tracking-wide); color: var(--muted); text-decoration: none; }
-    .footer .dev:hover { color: var(--fg); }
+    /* footer */
+    .footer { max-width: var(--maxw); margin-inline: auto; padding: var(--sp-xl) var(--gutter) var(--sp-l);
+      border-top: 1px solid var(--line-2); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--sp-m); }
+    .footer .big { font-family: var(--display); font-size: var(--t-display); line-height: .95; color: var(--ink); }
+    .footer .big i { color: var(--terra); font-style: normal; }
+    .footer .meta { text-align: right; font-family: var(--mono); font-size: var(--t-label); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+    .footer a { text-decoration: none; }
 
-    /* ---- MOTION: reveal on scroll ---- */
-    .reveal { opacity: 0; transform: translateY(34px); transition: opacity var(--dur-flow) var(--ease-out-expo), transform var(--dur-flow) var(--ease-out-expo); }
+    /* reveal */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
     .reveal.vis { opacity: 1; transform: none; }
 
-    /* ---- RESPONSIVE ---- */
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: var(--space-l); }
-      .mesh-wrap { max-width: 420px; margin-top: var(--space-l); }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: var(--sp-l); }
+      .bloom { margin-top: var(--sp-l); }
       .paths { grid-template-columns: 1fr; }
       .band { grid-template-columns: 1fr; }
-      .nav .nav-link { display: none; }
+      .nav .nl { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-      .reveal { opacity: 1; transform: none; }
-      .mesh-edge.hot { stroke-dashoffset: 0; }
+      *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+      .reveal { opacity:1; transform:none; } .thread.hot { stroke-dashoffset: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- TOP BAR -->
   <header class="topbar">
-    <span class="brand">pcc<b>.</b></span>
+    <span class="brand">pcc<i>.</i></span>
     <nav class="nav">
-      <a href="#do" class="nav-link">Do things</a>
-      <a href="#offer" class="nav-link">Offer things</a>
+      <a href="#do" class="nl">Do things</a>
+      <a href="#offer" class="nl">Offer things</a>
       <a href="#" class="dev">&lt;/&gt; developers</a>
     </nav>
   </header>
@@ -234,89 +210,75 @@
   <section class="hero">
     <div>
       <p class="label reveal">The capability network</p>
-      <h1 class="hero-h1 reveal" style="margin-top: var(--space-s);">
-        Your agent can do <span class="em">real</span> things now<span class="blk" aria-hidden="true"></span>
-      </h1>
-      <p class="hero-sub reveal">
-        Tell it what you want. It composes <b>verified real-world capabilities</b> —
-        pizza to power tools to lab assays — and proves every step.
-      </p>
+      <h1 class="reveal" style="margin-top:var(--sp-s);">Your agent can do <span class="t">real</span> things now<span class="dot">.</span></h1>
+      <p class="sub reveal">Tell it what you want. It composes <b>verified real-world capabilities</b> — pizza to power tools to lab assays — and proves every step.</p>
       <div class="doors reveal">
-        <a class="door door--do" href="#do">Do something <span class="arr">&rarr;</span></a>
-        <a class="door door--offer" href="#offer">Offer something <span class="arr">&rarr;</span></a>
+        <a class="btn btn--do" href="#do">Do something <span class="arr">&rarr;</span></a>
+        <a class="btn btn--offer" href="#offer">Offer something <span class="arr">&rarr;</span></a>
       </div>
     </div>
 
-    <!-- CAPABILITY MESH -->
-    <div class="mesh-wrap reveal">
-      <svg class="mesh" viewBox="0 0 400 400" role="img" aria-label="A mesh of capabilities composing into one verified task">
-        <!-- ambient edges -->
-        <g>
-          <line class="mesh-edge" x1="200" y1="200" x2="80" y2="90"/>
-          <line class="mesh-edge" x1="200" y1="200" x2="330" y2="70"/>
-          <line class="mesh-edge" x1="200" y1="200" x2="350" y2="240"/>
-          <line class="mesh-edge" x1="200" y1="200" x2="120" y2="330"/>
-          <line class="mesh-edge" x1="80" y1="90" x2="330" y2="70"/>
-          <line class="mesh-edge" x1="350" y1="240" x2="120" y2="330"/>
-          <line class="mesh-edge" x1="330" y1="70" x2="350" y2="240"/>
-        </g>
-        <!-- hot composition path: agent -> capability -> capability -> verified -->
-        <line class="mesh-edge hot" style="--len:170; animation-delay:.2s" x1="200" y1="200" x2="80" y2="90"/>
-        <line class="mesh-edge hot" style="--len:255; animation-delay:.9s" x1="80" y1="90" x2="330" y2="70"/>
-        <line class="mesh-edge hot" style="--len:230; animation-delay:1.6s" x1="330" y1="70" x2="350" y2="240"/>
-
+    <!-- warm capability bloom -->
+    <div class="reveal">
+      <svg class="bloom" viewBox="0 0 400 400" role="img" aria-label="Warm threads of capability composing into one verified outcome">
+        <defs>
+          <linearGradient id="warm" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#B8472A"/><stop offset="1" stop-color="#D98A2B"/>
+          </linearGradient>
+          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- ambient curved threads -->
+        <path class="thread" d="M200,200 C150,150 120,110 90,80"/>
+        <path class="thread" d="M200,200 C250,150 300,120 330,84"/>
+        <path class="thread" d="M200,200 C300,210 340,220 358,250"/>
+        <path class="thread" d="M200,200 C160,270 140,300 116,330"/>
+        <path class="thread" d="M90,80 C200,60 280,60 330,84"/>
+        <path class="thread" d="M358,250 C260,300 180,320 116,330"/>
+        <!-- hot composition path -->
+        <path class="thread hot" style="--len:150;animation-delay:.2s"  d="M200,200 C150,150 120,110 90,80"/>
+        <path class="thread hot" style="--len:260;animation-delay:.9s"  d="M90,80 C200,60 280,60 330,84"/>
+        <path class="thread hot" style="--len:230;animation-delay:1.5s" d="M330,84 C360,150 360,210 358,250"/>
         <!-- ambient nodes -->
-        <circle class="mesh-node" cx="120" cy="330" r="9"/>
-        <circle class="mesh-node" cx="350" cy="240" r="9"/>
-
-        <!-- pulse from the agent -->
-        <circle class="mesh-pulse" cx="200" cy="200"/>
-        <!-- hot path nodes -->
-        <circle class="mesh-node agent" cx="200" cy="200" r="13"/>
-        <circle class="mesh-node hot" cx="80" cy="90" r="10" style="animation-delay:.9s"/>
-        <circle class="mesh-node hot" cx="330" cy="70" r="10" style="animation-delay:1.6s"/>
-        <circle class="mesh-node verified" cx="350" cy="240" r="11" style="animation-delay:2.3s"/>
-
-        <text class="mesh-lbl" x="200" y="232" text-anchor="middle">agent</text>
-        <text class="mesh-lbl" x="80" y="72" text-anchor="middle">pizza</text>
-        <text class="mesh-lbl" x="330" y="52" text-anchor="middle">courier</text>
-        <text class="mesh-lbl" x="350" y="266" text-anchor="middle">verified</text>
+        <circle class="nd" cx="116" cy="330" r="9"/>
+        <!-- pulse + hot nodes -->
+        <circle class="ring" cx="200" cy="200"/>
+        <circle class="nd core glowing" cx="200" cy="200" r="13"/>
+        <circle class="nd glowing" cx="90" cy="80" r="10"/>
+        <circle class="nd glowing" cx="330" cy="84" r="10"/>
+        <circle class="nd amber glowing" cx="358" cy="250" r="11"/>
+        <text class="blbl" x="200" y="232" text-anchor="middle">agent</text>
+        <text class="blbl" x="90" y="62" text-anchor="middle">pizza</text>
+        <text class="blbl" x="330" y="66" text-anchor="middle">courier</text>
+        <text class="blbl" x="358" y="276" text-anchor="middle">verified</text>
       </svg>
     </div>
   </section>
 
   <!-- LIVE DEMO -->
-  <section class="section" id="demo">
+  <section class="wrap" style="padding-block:var(--sp-l);">
     <div class="demo reveal">
-      <p class="label">Watch it compose &mdash; live</p>
-      <div class="intent-bar">
-        <span class="intent-q"><span id="intent-text"></span><span class="cursor"></span></span>
-      </div>
+      <p class="label">Watch it compose — live</p>
+      <div class="intent"><span class="q"><span id="it"></span><span class="cur"></span></span></div>
       <div class="chain" id="chain">
-        <span class="step on" data-step="0"><span class="dot"></span> your agent</span>
-        <span class="sep">&rarr;</span>
-        <span class="step" data-step="1"><span class="dot"></span> pizza kernel</span>
-        <span class="sep">&rarr;</span>
-        <span class="step" data-step="2"><span class="dot"></span> courier</span>
-        <span class="sep">&rarr;</span>
-        <span class="step" data-step="3"><span class="dot"></span> pay</span>
-        <span class="sep">&rarr;</span>
-        <span class="step done-target" data-step="4"><span class="dot"></span> verified &check;</span>
+        <span class="step on"><span class="d"></span> your agent</span><span class="s">&rarr;</span>
+        <span class="step"><span class="d"></span> pizza kernel</span><span class="s">&rarr;</span>
+        <span class="step"><span class="d"></span> courier</span><span class="s">&rarr;</span>
+        <span class="step"><span class="d"></span> pay</span><span class="s">&rarr;</span>
+        <span class="step"><span class="d"></span> verified &check;</span>
       </div>
     </div>
   </section>
 
-  <!-- TWO PATHS -->
-  <section class="section">
-    <div class="section-head reveal">
-      <h2>Two doors. Both simple.</h2>
-      <p class="label">No terminal required</p>
-    </div>
+  <!-- TWO DOORS -->
+  <section class="wrap" style="padding-top:var(--sp-l);">
+    <div class="head reveal"><h2>Two doors. Both simple.</h2><p class="label" style="color:var(--ink-soft)">No terminal required</p></div>
     <div class="paths reveal">
       <div class="path path--do" id="do">
         <span class="tag">Do things</span>
         <h3>Tell your agent. It gets it done.</h3>
-        <p>Browse what the network can do as a visual catalog — never a list of commands. Connect your agent once, then just ask.</p>
+        <p>Browse what the network can do as a warm visual catalog — never a wall of commands. Connect once, then just ask.</p>
         <ol class="steps">
           <li><span class="n">01</span> Connect your agent (or use ours)</li>
           <li><span class="n">02</span> Browse capabilities — real things, real providers</li>
@@ -326,91 +288,46 @@
       <div class="path path--offer" id="offer">
         <span class="tag">Offer things</span>
         <h3>Adding a capability is a conversation.</h3>
-        <p>Describe what you offer in plain words. An agent builds the integration for you — the scary parts happen behind the scenes.</p>
+        <p>Describe what you offer in plain words. An agent builds the integration for you — the hard parts happen out of sight.</p>
         <ol class="steps">
           <li><span class="n">01</span> Describe your capability or good in plain language</li>
-          <li><span class="n">02</span> An agent scaffolds the kernel &mdash; no code from you</li>
+          <li><span class="n">02</span> An agent scaffolds the kernel — no code from you</li>
           <li><span class="n">03</span> Test, then publish. You&rsquo;re earning on the network.</li>
         </ol>
       </div>
     </div>
   </section>
 
-  <!-- VERIFIED BAND -->
-  <section class="section">
+  <!-- VERIFIED -->
+  <section class="wrap" style="padding-top:var(--sp-l);">
     <div class="band reveal">
       <div class="big">100<span class="x">%</span></div>
-      <p>Every action returns signed, independently-verifiable evidence. Composition you can trust, not just hope for.</p>
+      <p>Every action returns signed, independently-verifiable evidence. Composition you can trust — not just hope for.</p>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
-    <div class="big">do real things<b>.</b></div>
-    <div style="text-align:right;">
-      <a href="#" class="dev">&lt;/&gt; developers &amp; CLI</a><br/>
-      <span class="label" style="display:inline-block;margin-top:0.5rem;">capability.network &middot; 2026</span>
-    </div>
+    <div class="big">do real things<i>.</i></div>
+    <div class="meta"><a href="#" class="dev">&lt;/&gt; developers &amp; CLI</a><br/><span style="display:inline-block;margin-top:.5rem;">capability.network · 2026</span></div>
   </footer>
 
   <script>
-    /* ---- reveal on scroll (Axiom III: the medium is time) ---- */
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    /* ---- intent bar: cycle example intents ---- */
-    const intents = [
-      'get a pizza to my door tonight',
-      'run this assay on 96 samples',
-      'print and ship this part by friday',
-      'a ride to SFO at 6am'
-    ];
-    const out = document.getElementById('intent-text');
-    let ii = 0, ci = 0, typing = true;
-    function tick() {
-      const word = intents[ii];
-      if (typing) {
-        out.textContent = word.slice(0, ci++);
-        if (ci > word.length) { typing = false; setTimeout(tick, 1900); return; }
-        setTimeout(tick, 45);
-      } else {
-        out.textContent = word.slice(0, ci--);
-        if (ci < 0) { typing = true; ii = (ii + 1) % intents.length; ci = 0; setTimeout(tick, 220); return; }
-        setTimeout(tick, 22);
-      }
-    }
-    tick();
+    const intents=['get a pizza to my door tonight','run this assay on 96 samples','print and ship this part by friday','a ride to SFO at 6am'];
+    const out=document.getElementById('it'); let ii=0,ci=0,typ=true;
+    (function tick(){const w=intents[ii];
+      if(typ){out.textContent=w.slice(0,ci++); if(ci>w.length){typ=false;return setTimeout(tick,1900);} setTimeout(tick,45);}
+      else{out.textContent=w.slice(0,ci--); if(ci<0){typ=true;ii=(ii+1)%intents.length;ci=0;return setTimeout(tick,220);} setTimeout(tick,22);}})();
 
-    /* ---- chain: light up the composition steps on a loop ---- */
-    const steps = [...document.querySelectorAll('#chain .step')];
-    let si = 0;
-    setInterval(() => {
-      steps.forEach((s, i) => {
-        s.classList.toggle('on', i <= si);
-        s.classList.toggle('done', i === steps.length - 1 && si >= steps.length - 1);
-      });
-      si = (si + 1) % (steps.length + 2); // pause at the end before looping
-    }, 700);
+    const steps=[...document.querySelectorAll('#chain .step')]; let si=0;
+    setInterval(()=>{steps.forEach((s,i)=>{s.classList.toggle('on',i<=si);s.classList.toggle('done',i===steps.length-1&&si>=steps.length-1);});si=(si+1)%(steps.length+2);},700);
 
-    /* ============================================================
-       DATA SPINE — the page is a demand sensor.
-       Every intent typed (even anonymous) is signal into PCC's
-       demand-intelligence layer. Wire your real PostHog key below.
-       ============================================================ */
-    const PCC = {
-      capture(event, props) {
-        if (window.posthog) { window.posthog.capture(event, props); }
-        else { console.debug('[pcc:event]', event, props || {}); } // stub until key is set
-      }
-    };
-    // example: capture self-select on the two doors
-    document.querySelectorAll('.door').forEach(d =>
-      d.addEventListener('click', () => PCC.capture('door_click', { door: d.classList.contains('door--do') ? 'do' : 'offer' }))
-    );
-    // TODO(owner): drop the PostHog snippet here with your project key to turn the stub live.
-    // Anonymous intent capture from a real input becomes the operator-recruitment map.
+    // DATA SPINE — page is a demand sensor. Wire your PostHog key to go live.
+    const PCC={capture(ev,p){window.posthog?window.posthog.capture(ev,p):console.debug('[pcc:event]',ev,p||{});}};
+    document.querySelectorAll('.btn').forEach(b=>b.addEventListener('click',()=>PCC.capture('door_click',{door:b.classList.contains('btn--do')?'do':'offer'})));
+    // TODO(owner): drop PostHog snippet + capture anonymous intents from a real input → demand-intelligence.
   </script>
 </body>
 </html>
