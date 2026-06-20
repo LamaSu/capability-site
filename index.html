@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" data-mood="pcc" data-mode="editorial">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCC — your agent can do real things now</title>
+  <meta name="description" content="Tell your agent what you want. It composes verified real-world capabilities — and proves every step. The capability network." />
+
+  <!-- Monument (Space Grotesk) + Swiss (Inter). type IS the art. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       PCC — capability.network
+       Composed from the Controlled Chaos design system
+       (tokens/voices/motion) with a custom `pcc` mood.
+       Axioms: I. Hierarchy is the job  II. Tension is beauty
+               III. The medium is time
+       ============================================================ */
+
+    /* ---- RESET ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    img, svg { display: block; max-width: 100%; }
+
+    /* ---- TOKENS ---- */
+    :root {
+      /* type scale — non-linear, the violence between massive & body is the design */
+      --type-massive:  clamp(3.25rem, 9vw + 0.5rem, 11rem);
+      --type-display:  clamp(2.25rem, 5vw + 0.5rem, 5.5rem);
+      --type-headline: clamp(1.6rem, 3vw + 0.4rem, 3rem);
+      --type-subhead:  clamp(1.05rem, 1.3vw + 0.3rem, 1.45rem);
+      --type-body:     clamp(0.95rem, 0.4vw + 0.8rem, 1.1rem);
+      --type-caption:  clamp(0.7rem, 0.3vw + 0.55rem, 0.8rem);
+
+      --tracking-tight: -0.03em; --tracking-snug: -0.015em;
+      --tracking-wide: 0.06em;  --tracking-widest: 0.2em;
+      --leading-crush: 0.9; --leading-snug: 1.08; --leading-normal: 1.55;
+
+      --font-monument: 'Space Grotesk', system-ui, sans-serif;
+      --font-swiss: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+      /* spacing */
+      --space-xs: clamp(0.5rem, 0.3vw + 0.4rem, 0.75rem);
+      --space-s:  clamp(0.75rem, 0.5vw + 0.5rem, 1rem);
+      --space-m:  clamp(1rem, 1vw + 0.5rem, 1.5rem);
+      --space-l:  clamp(1.5rem, 2vw + 0.5rem, 2.5rem);
+      --space-xl: clamp(2.5rem, 4vw + 0.5rem, 5rem);
+      --space-2xl: clamp(4rem, 7vw + 1rem, 9rem);
+      --gutter: clamp(1.25rem, 4vw, 4rem);
+      --maxw: 1600px;
+
+      /* motion */
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-snap: cubic-bezier(0.7, 0, 0.3, 1);
+      --dur-swift: 350ms; --dur-flow: 650ms; --dur-drift: 1100ms; --dur-breathe: 2600ms;
+
+      /* ---- MOOD: PCC — bright paper, electric blue, signal-orange discord ---- */
+      --bg:       #FAFAF7;
+      --fg:       #0A0A0A;
+      --accent:   #1B2BFF;  /* electric blue — primary, "do" */
+      --discord:  #FF4D1C;  /* signal orange — the one that doesn't belong, "offer" */
+      --muted:    #6B6B66;
+      --subtle:   #ECECE6;
+      --line:     #15151333;
+      --line-solid:#151513;
+    }
+
+    body {
+      background: var(--bg); color: var(--fg);
+      font-family: var(--font-swiss); font-weight: 400;
+      line-height: var(--leading-normal);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    /* grain — subtle materiality */
+    body::after {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      opacity: 0.04; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ---- VOICES ---- */
+    .voice-monument { font-family: var(--font-monument); font-weight: 700; letter-spacing: var(--tracking-tight); line-height: var(--leading-crush); }
+    .label { font-family: var(--font-swiss); font-size: var(--type-caption); font-weight: 500; letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--muted); }
+
+    /* ---- TOP BAR ---- */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-m) var(--gutter); position: sticky; top: 0; z-index: 100;
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+    }
+    .brand { font-family: var(--font-monument); font-weight: 700; font-size: 1.15rem; letter-spacing: var(--tracking-snug); }
+    .brand b { color: var(--accent); }
+    .nav { display: flex; gap: var(--space-l); align-items: center; }
+    .nav a { color: var(--fg); text-decoration: none; font-size: var(--type-caption); letter-spacing: var(--tracking-wide); text-transform: uppercase; opacity: 0.7; transition: opacity var(--dur-swift); }
+    .nav a:hover { opacity: 1; }
+    .nav .dev { font-family: var(--font-monument); opacity: 0.45; }
+
+    /* ---- HERO — asymmetric: type left, mesh right ---- */
+    .hero {
+      display: grid; grid-template-columns: 1.35fr 1fr; align-items: center;
+      gap: var(--space-l); min-height: 86vh;
+      padding: var(--space-xl) var(--gutter) var(--space-2xl);
+      max-width: var(--maxw); margin-inline: auto;
+    }
+    .hero-h1 {
+      font-family: var(--font-monument); font-weight: 700;
+      font-size: var(--type-massive); line-height: 0.92; letter-spacing: var(--tracking-tight);
+      max-width: 14ch;
+    }
+    .hero-h1 .em { color: var(--accent); }
+    .hero-h1 .blk { display: inline-block; width: 0.55em; height: 0.55em; background: var(--discord); margin-left: 0.08em; vertical-align: baseline; transform: translateY(0.02em); }
+    .hero-sub { font-size: var(--type-subhead); color: var(--muted); max-width: 44ch; margin-top: var(--space-l); line-height: var(--leading-snug); }
+    .hero-sub b { color: var(--fg); font-weight: 600; }
+
+    /* doors */
+    .doors { display: flex; gap: var(--space-s); margin-top: var(--space-l); flex-wrap: wrap; }
+    .door {
+      font-family: var(--font-swiss); font-size: 1.02rem; font-weight: 600; letter-spacing: var(--tracking-snug);
+      padding: 0.95em 1.6em; border: none; cursor: pointer; text-decoration: none; color: var(--bg);
+      display: inline-flex; align-items: center; gap: 0.6em;
+      transition: transform var(--dur-swift) var(--ease-out-expo), box-shadow var(--dur-swift);
+    }
+    .door .arr { transition: transform var(--dur-swift) var(--ease-out-expo); }
+    .door:hover { transform: translateY(-3px); }
+    .door:hover .arr { transform: translateX(4px); }
+    .door--do    { background: var(--accent); box-shadow: 0 6px 0 color-mix(in srgb, var(--accent) 55%, #000); }
+    .door--offer { background: var(--discord); box-shadow: 0 6px 0 color-mix(in srgb, var(--discord) 55%, #000); }
+    .door--do:hover    { box-shadow: 0 9px 0 color-mix(in srgb, var(--accent) 55%, #000); }
+    .door--offer:hover { box-shadow: 0 9px 0 color-mix(in srgb, var(--discord) 55%, #000); }
+
+    /* ---- CAPABILITY MESH (hero art) ---- */
+    .mesh-wrap { position: relative; aspect-ratio: 1 / 1; width: 100%; }
+    .mesh { width: 100%; height: 100%; overflow: visible; }
+    .mesh-edge { stroke: var(--line-solid); stroke-width: 1; opacity: 0.18; }
+    .mesh-edge.hot {
+      stroke: var(--accent); stroke-width: 2; opacity: 1;
+      stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
+      animation: draw var(--dur-drift) var(--ease-out-expo) forwards;
+    }
+    .mesh-node { fill: var(--bg); stroke: var(--line-solid); stroke-width: 1.5; }
+    .mesh-node.hot { stroke: var(--accent); fill: var(--accent); animation: pop var(--dur-swift) var(--ease-snap) both; }
+    .mesh-node.agent { fill: var(--fg); stroke: var(--fg); }
+    .mesh-node.verified { stroke: var(--discord); fill: var(--discord); }
+    .mesh-pulse { fill: none; stroke: var(--accent); stroke-width: 1.5; opacity: 0; transform-origin: center; animation: pulse var(--dur-breathe) var(--ease-out-expo) infinite; }
+    .mesh-lbl { font-family: var(--font-monument); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--muted); }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes pop  { 0% { transform: scale(0); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
+    @keyframes pulse { 0% { r: 6; opacity: 0.5; } 100% { r: 46; opacity: 0; } }
+
+    /* ---- SECTION FRAME ---- */
+    .section { max-width: var(--maxw); margin-inline: auto; padding: var(--space-2xl) var(--gutter); border-top: 1px solid var(--line); }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-m); margin-bottom: var(--space-xl); flex-wrap: wrap; }
+    .section-head h2 { font-family: var(--font-monument); font-weight: 700; font-size: var(--type-display); letter-spacing: var(--tracking-tight); line-height: var(--leading-crush); max-width: 16ch; }
+
+    /* ---- LIVE DEMO ---- */
+    .demo { background: var(--fg); color: var(--bg); border-radius: 2px; padding: var(--space-xl); }
+    .demo .label { color: color-mix(in srgb, var(--bg) 60%, transparent); }
+    .intent-bar { display: flex; align-items: center; gap: var(--space-s); margin: var(--space-m) 0 var(--space-l); border-bottom: 2px solid var(--accent); padding-bottom: var(--space-s); }
+    .intent-q { font-family: var(--font-monument); font-size: clamp(1.3rem, 2.5vw, 2.2rem); font-weight: 500; color: var(--bg); }
+    .intent-q .cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .chain { display: flex; align-items: center; gap: var(--space-s); flex-wrap: wrap; font-family: var(--font-monument); font-size: var(--type-caption); letter-spacing: 0.06em; text-transform: uppercase; }
+    .step { display: inline-flex; align-items: center; gap: 0.5em; padding: 0.5em 0.9em; border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); opacity: 0.25; transition: opacity var(--dur-swift) var(--ease-out-expo), border-color var(--dur-swift); }
+    .step.on { opacity: 1; border-color: var(--accent); }
+    .step.done { border-color: var(--discord); }
+    .step .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .chain .sep { opacity: 0.3; }
+
+    /* ---- TWO PATHS ---- */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .path { background: var(--bg); padding: var(--space-xl); }
+    .path .tag { display: inline-block; font-family: var(--font-monument); font-size: var(--type-caption); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; padding: 0.35em 0.7em; color: var(--bg); margin-bottom: var(--space-m); }
+    .path--do .tag { background: var(--accent); }
+    .path--offer .tag { background: var(--discord); }
+    .path h3 { font-family: var(--font-monument); font-weight: 700; font-size: var(--type-headline); letter-spacing: var(--tracking-snug); line-height: var(--leading-snug); margin-bottom: var(--space-s); }
+    .path p { color: var(--muted); max-width: 42ch; margin-bottom: var(--space-m); }
+    .steps { list-style: none; display: flex; flex-direction: column; gap: var(--space-s); }
+    .steps li { display: flex; gap: var(--space-s); align-items: baseline; font-size: var(--type-body); }
+    .steps .n { font-family: var(--font-monument); font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+    .path--offer .steps .n { color: var(--discord); }
+
+    /* ---- VERIFIED BAND ---- */
+    .band { display: grid; grid-template-columns: auto 1fr; gap: var(--space-l); align-items: center; }
+    .band .big { font-family: var(--font-monument); font-weight: 700; font-size: var(--type-massive); line-height: 0.85; letter-spacing: var(--tracking-tight); color: var(--accent); }
+    .band .big .x { color: var(--discord); }
+    .band p { font-size: var(--type-subhead); max-width: 40ch; color: var(--fg); }
+
+    /* ---- FOOTER ---- */
+    .footer { max-width: var(--maxw); margin-inline: auto; padding: var(--space-xl) var(--gutter); border-top: 1px solid var(--line-solid); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--space-m); }
+    .footer .big { font-family: var(--font-monument); font-weight: 700; font-size: var(--type-display); letter-spacing: var(--tracking-tight); line-height: 0.9; }
+    .footer .big b { color: var(--accent); }
+    .footer .dev { font-family: var(--font-monument); font-size: var(--type-caption); letter-spacing: var(--tracking-wide); color: var(--muted); text-decoration: none; }
+    .footer .dev:hover { color: var(--fg); }
+
+    /* ---- MOTION: reveal on scroll ---- */
+    .reveal { opacity: 0; transform: translateY(34px); transition: opacity var(--dur-flow) var(--ease-out-expo), transform var(--dur-flow) var(--ease-out-expo); }
+    .reveal.vis { opacity: 1; transform: none; }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: var(--space-l); }
+      .mesh-wrap { max-width: 420px; margin-top: var(--space-l); }
+      .paths { grid-template-columns: 1fr; }
+      .band { grid-template-columns: 1fr; }
+      .nav .nav-link { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      .mesh-edge.hot { stroke-dashoffset: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <span class="brand">pcc<b>.</b></span>
+    <nav class="nav">
+      <a href="#do" class="nav-link">Do things</a>
+      <a href="#offer" class="nav-link">Offer things</a>
+      <a href="#" class="dev">&lt;/&gt; developers</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <p class="label reveal">The capability network</p>
+      <h1 class="hero-h1 reveal" style="margin-top: var(--space-s);">
+        Your agent can do <span class="em">real</span> things now<span class="blk" aria-hidden="true"></span>
+      </h1>
+      <p class="hero-sub reveal">
+        Tell it what you want. It composes <b>verified real-world capabilities</b> —
+        pizza to power tools to lab assays — and proves every step.
+      </p>
+      <div class="doors reveal">
+        <a class="door door--do" href="#do">Do something <span class="arr">&rarr;</span></a>
+        <a class="door door--offer" href="#offer">Offer something <span class="arr">&rarr;</span></a>
+      </div>
+    </div>
+
+    <!-- CAPABILITY MESH -->
+    <div class="mesh-wrap reveal">
+      <svg class="mesh" viewBox="0 0 400 400" role="img" aria-label="A mesh of capabilities composing into one verified task">
+        <!-- ambient edges -->
+        <g>
+          <line class="mesh-edge" x1="200" y1="200" x2="80" y2="90"/>
+          <line class="mesh-edge" x1="200" y1="200" x2="330" y2="70"/>
+          <line class="mesh-edge" x1="200" y1="200" x2="350" y2="240"/>
+          <line class="mesh-edge" x1="200" y1="200" x2="120" y2="330"/>
+          <line class="mesh-edge" x1="80" y1="90" x2="330" y2="70"/>
+          <line class="mesh-edge" x1="350" y1="240" x2="120" y2="330"/>
+          <line class="mesh-edge" x1="330" y1="70" x2="350" y2="240"/>
+        </g>
+        <!-- hot composition path: agent -> capability -> capability -> verified -->
+        <line class="mesh-edge hot" style="--len:170; animation-delay:.2s" x1="200" y1="200" x2="80" y2="90"/>
+        <line class="mesh-edge hot" style="--len:255; animation-delay:.9s" x1="80" y1="90" x2="330" y2="70"/>
+        <line class="mesh-edge hot" style="--len:230; animation-delay:1.6s" x1="330" y1="70" x2="350" y2="240"/>
+
+        <!-- ambient nodes -->
+        <circle class="mesh-node" cx="120" cy="330" r="9"/>
+        <circle class="mesh-node" cx="350" cy="240" r="9"/>
+
+        <!-- pulse from the agent -->
+        <circle class="mesh-pulse" cx="200" cy="200"/>
+        <!-- hot path nodes -->
+        <circle class="mesh-node agent" cx="200" cy="200" r="13"/>
+        <circle class="mesh-node hot" cx="80" cy="90" r="10" style="animation-delay:.9s"/>
+        <circle class="mesh-node hot" cx="330" cy="70" r="10" style="animation-delay:1.6s"/>
+        <circle class="mesh-node verified" cx="350" cy="240" r="11" style="animation-delay:2.3s"/>
+
+        <text class="mesh-lbl" x="200" y="232" text-anchor="middle">agent</text>
+        <text class="mesh-lbl" x="80" y="72" text-anchor="middle">pizza</text>
+        <text class="mesh-lbl" x="330" y="52" text-anchor="middle">courier</text>
+        <text class="mesh-lbl" x="350" y="266" text-anchor="middle">verified</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- LIVE DEMO -->
+  <section class="section" id="demo">
+    <div class="demo reveal">
+      <p class="label">Watch it compose &mdash; live</p>
+      <div class="intent-bar">
+        <span class="intent-q"><span id="intent-text"></span><span class="cursor"></span></span>
+      </div>
+      <div class="chain" id="chain">
+        <span class="step on" data-step="0"><span class="dot"></span> your agent</span>
+        <span class="sep">&rarr;</span>
+        <span class="step" data-step="1"><span class="dot"></span> pizza kernel</span>
+        <span class="sep">&rarr;</span>
+        <span class="step" data-step="2"><span class="dot"></span> courier</span>
+        <span class="sep">&rarr;</span>
+        <span class="step" data-step="3"><span class="dot"></span> pay</span>
+        <span class="sep">&rarr;</span>
+        <span class="step done-target" data-step="4"><span class="dot"></span> verified &check;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO PATHS -->
+  <section class="section">
+    <div class="section-head reveal">
+      <h2>Two doors. Both simple.</h2>
+      <p class="label">No terminal required</p>
+    </div>
+    <div class="paths reveal">
+      <div class="path path--do" id="do">
+        <span class="tag">Do things</span>
+        <h3>Tell your agent. It gets it done.</h3>
+        <p>Browse what the network can do as a visual catalog — never a list of commands. Connect your agent once, then just ask.</p>
+        <ol class="steps">
+          <li><span class="n">01</span> Connect your agent (or use ours)</li>
+          <li><span class="n">02</span> Browse capabilities — real things, real providers</li>
+          <li><span class="n">03</span> Ask for an outcome. Watch it compose &amp; verify.</li>
+        </ol>
+      </div>
+      <div class="path path--offer" id="offer">
+        <span class="tag">Offer things</span>
+        <h3>Adding a capability is a conversation.</h3>
+        <p>Describe what you offer in plain words. An agent builds the integration for you — the scary parts happen behind the scenes.</p>
+        <ol class="steps">
+          <li><span class="n">01</span> Describe your capability or good in plain language</li>
+          <li><span class="n">02</span> An agent scaffolds the kernel &mdash; no code from you</li>
+          <li><span class="n">03</span> Test, then publish. You&rsquo;re earning on the network.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERIFIED BAND -->
+  <section class="section">
+    <div class="band reveal">
+      <div class="big">100<span class="x">%</span></div>
+      <p>Every action returns signed, independently-verifiable evidence. Composition you can trust, not just hope for.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="big">do real things<b>.</b></div>
+    <div style="text-align:right;">
+      <a href="#" class="dev">&lt;/&gt; developers &amp; CLI</a><br/>
+      <span class="label" style="display:inline-block;margin-top:0.5rem;">capability.network &middot; 2026</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ---- reveal on scroll (Axiom III: the medium is time) ---- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    /* ---- intent bar: cycle example intents ---- */
+    const intents = [
+      'get a pizza to my door tonight',
+      'run this assay on 96 samples',
+      'print and ship this part by friday',
+      'a ride to SFO at 6am'
+    ];
+    const out = document.getElementById('intent-text');
+    let ii = 0, ci = 0, typing = true;
+    function tick() {
+      const word = intents[ii];
+      if (typing) {
+        out.textContent = word.slice(0, ci++);
+        if (ci > word.length) { typing = false; setTimeout(tick, 1900); return; }
+        setTimeout(tick, 45);
+      } else {
+        out.textContent = word.slice(0, ci--);
+        if (ci < 0) { typing = true; ii = (ii + 1) % intents.length; ci = 0; setTimeout(tick, 220); return; }
+        setTimeout(tick, 22);
+      }
+    }
+    tick();
+
+    /* ---- chain: light up the composition steps on a loop ---- */
+    const steps = [...document.querySelectorAll('#chain .step')];
+    let si = 0;
+    setInterval(() => {
+      steps.forEach((s, i) => {
+        s.classList.toggle('on', i <= si);
+        s.classList.toggle('done', i === steps.length - 1 && si >= steps.length - 1);
+      });
+      si = (si + 1) % (steps.length + 2); // pause at the end before looping
+    }, 700);
+
+    /* ============================================================
+       DATA SPINE — the page is a demand sensor.
+       Every intent typed (even anonymous) is signal into PCC's
+       demand-intelligence layer. Wire your real PostHog key below.
+       ============================================================ */
+    const PCC = {
+      capture(event, props) {
+        if (window.posthog) { window.posthog.capture(event, props); }
+        else { console.debug('[pcc:event]', event, props || {}); } // stub until key is set
+      }
+    };
+    // example: capture self-select on the two doors
+    document.querySelectorAll('.door').forEach(d =>
+      d.addEventListener('click', () => PCC.capture('door_click', { door: d.classList.contains('door--do') ? 'do' : 'offer' }))
+    );
+    // TODO(owner): drop the PostHog snippet here with your project key to turn the stub live.
+    // Anonymous intent capture from a real input becomes the operator-recruitment map.
+  </script>
+</body>
+</html>
