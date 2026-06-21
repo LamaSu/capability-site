@@ -1,55 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" data-mood="pcc-warm">
+<html lang="en" data-mood="pcc-oaxaca">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PCC — your agent can do real things now</title>
   <meta name="description" content="Tell your agent what you want. It composes verified real-world capabilities — and proves every step. The capability network." />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Calistoga (warm display) + Inter (body) + JetBrains Mono (labels) — the DB's warm tri-stack -->
   <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
   <style>
     /* ============================================================
-       PCC — capability.network  ·  WARM v2
-       Palette from ui-ux-pro-max (warm terracotta + cream + pine).
-       Type: Calistoga ("adds human warmth") + Inter + JetBrains Mono.
-       Axioms (controlledchaos): hierarchy · tension · time.
+       PCC — capability.network  ·  v3 "Oaxaca"
+       Visual ref: @reverse.orientalism — purple + yellow doorway,
+       sun-washed Mexican architecture, bold two-colour blocking.
+       The doorway = PCC's two doors (Do / Offer).
+       Type: Calistoga + Inter + JetBrains Mono.
        ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    svg, img { display: block; max-width: 100%; }
+    svg,img { display: block; max-width: 100%; }
 
     :root {
-      /* ---- WARM PALETTE ---- */
-      --bg:        #F6EEDF;   /* warm cream */
-      --bg-2:      #F0E1C9;   /* deeper cream (gradient) */
-      --bg-3:      #F3E7D2;
-      --card:      #FBF6EC;   /* card cream */
-      --ink:       #2A1E15;   /* warm espresso (not black) */
-      --ink-soft:  #6A5848;   /* warm taupe text */
-      --terra:     #B8472A;   /* terracotta — primary */
-      --terra-dk:  #93351E;
-      --ochre:     #D98A2B;   /* amber/ochre — accent / discord */
-      --ochre-lt:  #ECC079;
-      --pine:      #2E5A4C;   /* fresh-green counter, deepened */
-      --line:      #2a1e1518;
-      --line-2:    #2a1e1530;
+      /* ---- OAXACA PALETTE ---- */
+      --plaster: #F4EAD3;   /* sun-washed plaster */
+      --plaster-2:#EDDFC0;
+      --card:    #FBF4E3;
+      --ink:     #2A2230;   /* warm aubergine-charcoal */
+      --ink-soft:#6E6068;
+      --purple:  #6C3FA3;   /* jacaranda */
+      --purple-dk:#4A2879;
+      --purple-lt:#A37FD0;
+      --yellow:  #F2A90E;   /* marigold */
+      --yellow-dk:#CE8908;
+      --yellow-lt:#F8CB5C;
+      --clay:    #C2562E;   /* Oaxacan wall */
+      --line:    #2a223018;
+      --line-2:  #2a223030;
 
-      /* ---- TYPE ---- */
       --display: 'Calistoga', Georgia, serif;
       --sans: 'Inter', system-ui, sans-serif;
       --mono: 'JetBrains Mono', ui-monospace, monospace;
-      --t-massive: clamp(3.1rem, 8vw + 0.5rem, 9.5rem);
-      --t-display: clamp(2.1rem, 4.5vw + 0.5rem, 4.75rem);
-      --t-head:    clamp(1.6rem, 2.6vw + 0.4rem, 2.7rem);
-      --t-sub:     clamp(1.1rem, 1.2vw + 0.4rem, 1.45rem);
-      --t-body:    clamp(1rem, 0.4vw + 0.85rem, 1.12rem);
-      --t-label:   0.74rem;
+      --t-massive: clamp(3rem, 8vw + .5rem, 9.5rem);
+      --t-display: clamp(2.1rem, 4.5vw + .5rem, 4.75rem);
+      --t-head: clamp(1.55rem, 2.6vw + .4rem, 2.7rem);
+      --t-sub: clamp(1.1rem, 1.2vw + .4rem, 1.45rem);
+      --t-body: clamp(1rem, .4vw + .85rem, 1.12rem);
+      --t-label: .74rem;
 
-      /* ---- SPACE / MOTION ---- */
       --gutter: clamp(1.25rem, 4vw, 4.5rem);
       --maxw: 1480px;
       --sp-s: clamp(.75rem,.5vw + .5rem,1rem);
@@ -57,141 +54,123 @@
       --sp-l: clamp(1.75rem,2.5vw + .5rem,3rem);
       --sp-xl: clamp(3rem,5vw + .5rem,6rem);
       --sp-2xl: clamp(4.5rem,8vw + 1rem,10rem);
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease: cubic-bezier(0.16,1,0.3,1);
       --r: 18px; --r-lg: 26px; --r-pill: 100px;
     }
 
     body {
       font-family: var(--sans); color: var(--ink); line-height: 1.6;
       background:
-        radial-gradient(120% 80% at 78% -8%, #F8DFB8 0%, transparent 46%),
-        radial-gradient(100% 70% at 0% 8%, #F4E3CB 0%, transparent 40%),
-        linear-gradient(176deg, var(--bg) 0%, var(--bg-3) 60%, var(--bg-2) 100%);
-      background-attachment: fixed;
+        radial-gradient(115% 75% at 82% -10%, #F7D98C 0%, transparent 44%),
+        radial-gradient(95% 65% at -5% 6%, #E7CDEC 0%, transparent 40%),
+        linear-gradient(176deg, var(--plaster) 0%, #F1E6CD 60%, var(--plaster-2) 100%);
+      background-attachment: fixed; overflow-x: hidden;
       -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
     }
-    body::after {  /* warm grain */
-      content:''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
-      opacity: .05; mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-    ::selection { background: var(--terra); color: var(--bg); }
+    body::after { content:''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      opacity: .055; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    ::selection { background: var(--purple); color: var(--plaster); }
     a { color: inherit; }
-
-    .label { font-family: var(--mono); font-size: var(--t-label); font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--terra); }
+    .label { font-family: var(--mono); font-size: var(--t-label); font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--clay); }
 
     /* ---- TOP BAR ---- */
-    .topbar { display: flex; align-items: center; justify-content: space-between;
-      padding: var(--sp-m) var(--gutter); position: sticky; top: 0; z-index: 100;
-      background: color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter: blur(12px) saturate(1.2);
-      border-bottom: 1px solid var(--line); }
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: var(--sp-m) var(--gutter);
+      position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--plaster) 72%, transparent);
+      backdrop-filter: blur(12px) saturate(1.2); border-bottom: 1px solid var(--line); }
     .brand { font-family: var(--display); font-size: 1.35rem; color: var(--ink); }
-    .brand i { color: var(--terra); font-style: normal; }
+    .brand i { color: var(--purple); font-style: normal; }
     .nav { display: flex; gap: var(--sp-l); align-items: center; }
     .nav a { font-family: var(--mono); font-size: var(--t-label); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; opacity: .65; transition: opacity .3s; }
-    .nav a:hover { opacity: 1; }
-    .nav .dev { color: var(--ink-soft); }
+    .nav a:hover { opacity: 1; } .nav .dev { color: var(--ink-soft); }
 
     /* ---- HERO ---- */
-    .hero { display: grid; grid-template-columns: 1.25fr 1fr; align-items: center; gap: var(--sp-l);
-      max-width: var(--maxw); margin-inline: auto; padding: var(--sp-xl) var(--gutter) var(--sp-2xl); min-height: 82vh; }
-    .hero h1 { font-family: var(--display); font-weight: 400; font-size: var(--t-massive); line-height: .98;
-      letter-spacing: -.005em; color: var(--ink); max-width: 13ch; }
-    .hero h1 .t { color: var(--terra); }
-    .hero h1 .dot { color: var(--ochre); }
+    .hero { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: var(--sp-l);
+      max-width: var(--maxw); margin-inline: auto; padding: var(--sp-xl) var(--gutter) var(--sp-2xl); min-height: 84vh; }
+    .hero h1 { font-family: var(--display); font-weight: 400; font-size: var(--t-massive); line-height: .98; letter-spacing: -.005em; color: var(--ink); max-width: 13ch; }
+    .hero h1 .p { color: var(--purple); } .hero h1 .y { color: var(--yellow-dk); }
     .hero .sub { font-size: var(--t-sub); color: var(--ink-soft); max-width: 42ch; margin-top: var(--sp-m); line-height: 1.45; }
     .hero .sub b { color: var(--ink); font-weight: 600; }
-
     .doors { display: flex; gap: var(--sp-s); margin-top: var(--sp-l); flex-wrap: wrap; }
-    .btn { font-family: var(--sans); font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em;
-      padding: .95em 1.7em; border: none; border-radius: var(--r-pill); cursor: pointer; text-decoration: none;
-      display: inline-flex; align-items: center; gap: .55em; transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
-    .btn .arr { transition: transform .35s var(--ease); }
-    .btn:hover { transform: translateY(-3px); } .btn:hover .arr { transform: translateX(5px); }
-    .btn--do { background: var(--terra); color: #fff; box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--terra) 65%, transparent); }
-    .btn--do:hover { box-shadow: 0 16px 34px -8px color-mix(in srgb, var(--terra) 65%, transparent); }
-    .btn--offer { background: var(--pine); color: #fff; box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--pine) 60%, transparent); }
-    .btn--offer:hover { box-shadow: 0 16px 34px -8px color-mix(in srgb, var(--pine) 60%, transparent); }
+    .btn { font-family: var(--sans); font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; padding: .95em 1.7em;
+      border: none; border-radius: var(--r-pill); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: .55em;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+    .btn .arr { transition: transform .35s var(--ease); } .btn:hover { transform: translateY(-3px); } .btn:hover .arr { transform: translateX(5px); }
+    .btn--do { background: var(--purple); color: #fff; box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--purple) 70%, transparent); }
+    .btn--do:hover { box-shadow: 0 16px 34px -8px color-mix(in srgb, var(--purple) 70%, transparent); }
+    .btn--offer { background: var(--yellow); color: var(--ink); box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--yellow-dk) 75%, transparent); }
+    .btn--offer:hover { box-shadow: 0 16px 34px -8px color-mix(in srgb, var(--yellow-dk) 75%, transparent); }
 
-    /* ---- HERO ART: warm capability bloom ---- */
-    .bloom { width: 100%; aspect-ratio: 1; max-width: 540px; margin-inline: auto; overflow: visible; }
-    .thread { fill: none; stroke: url(#warm); stroke-width: 2; stroke-linecap: round; opacity: .55; }
-    .thread.hot { stroke-width: 3; opacity: 1; filter: url(#glow);
+    /* ---- HERO ART: the doorway ---- */
+    .door-art { width: 100%; max-width: 440px; margin-inline: auto; aspect-ratio: 360/460; overflow: visible; }
+    .jamb { fill: var(--purple); }
+    .opening { fill: url(#sun); }
+    .thread { fill: none; stroke: var(--purple-dk); stroke-width: 2.4; stroke-linecap: round; opacity: .5; }
+    .thread.hot { stroke: var(--purple-dk); stroke-width: 3.2; opacity: 1; filter: url(#glow);
       stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: draw 1.6s var(--ease) forwards; }
-    .nd { fill: var(--card); stroke: var(--terra); stroke-width: 2; }
-    .nd.core { fill: var(--ink); stroke: var(--ink); }
-    .nd.amber { fill: var(--ochre); stroke: var(--ochre); }
-    .nd.glowing { filter: url(#glow); }
-    .ring { fill: none; stroke: var(--terra); stroke-width: 1.5; opacity: 0; transform-origin: center; animation: pulse 3s var(--ease) infinite; }
-    .blbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; fill: var(--ink-soft); }
+    .nd { fill: var(--card); stroke: var(--purple-dk); stroke-width: 2.4; }
+    .nd.core { fill: var(--purple-dk); stroke: var(--purple-dk); } .nd.amber { fill: var(--yellow); stroke: var(--clay); }
+    .glow { filter: url(#glow); }
+    .ring { fill: none; stroke: var(--purple-dk); stroke-width: 1.6; opacity: 0; animation: pulse 3s var(--ease) infinite; }
+    .petal { fill: var(--purple-lt); opacity: .85; animation: fall var(--pd,6s) linear infinite; }
+    .blbl { font-family: var(--mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; fill: var(--purple-dk); }
     @keyframes draw { to { stroke-dashoffset: 0; } }
-    @keyframes pulse { 0% { r: 8; opacity: .45; } 100% { r: 64; opacity: 0; } }
+    @keyframes pulse { 0% { r: 8; opacity: .4; } 100% { r: 60; opacity: 0; } }
+    @keyframes fall { 0% { transform: translateY(-6px) rotate(0); opacity: 0; } 12% { opacity: .85; } 100% { transform: translateY(150px) rotate(160deg); opacity: 0; } }
 
     /* ---- SECTIONS ---- */
     .wrap { max-width: var(--maxw); margin-inline: auto; padding: var(--sp-2xl) var(--gutter); }
     .head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-m); margin-bottom: var(--sp-l); flex-wrap: wrap; }
     .head h2 { font-family: var(--display); font-weight: 400; font-size: var(--t-display); line-height: 1; color: var(--ink); max-width: 16ch; }
 
-    /* live demo card */
-    .demo { background: var(--ink); color: var(--bg); border-radius: var(--r-lg); padding: var(--sp-xl);
-      box-shadow: 0 30px 60px -28px color-mix(in srgb, var(--ink) 55%, transparent); }
-    .demo .label { color: var(--ochre-lt); }
-    .intent { display: flex; align-items: center; gap: var(--sp-s); margin: var(--sp-s) 0 var(--sp-l);
-      border-bottom: 2px solid var(--ochre); padding-bottom: var(--sp-s); }
-    .intent .q { font-family: var(--display); font-size: clamp(1.35rem, 2.6vw, 2.3rem); color: var(--bg); }
-    .intent .cur { display: inline-block; width: 2px; height: 1em; background: var(--ochre); vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
+    .demo { background: var(--ink); color: var(--plaster); border-radius: var(--r-lg); padding: var(--sp-xl); box-shadow: 0 30px 60px -28px color-mix(in srgb, var(--ink) 60%, transparent); }
+    .demo .label { color: var(--yellow-lt); }
+    .intent { display: flex; align-items: center; gap: var(--sp-s); margin: var(--sp-s) 0 var(--sp-l); border-bottom: 2px solid var(--yellow); padding-bottom: var(--sp-s); }
+    .intent .q { font-family: var(--display); font-size: clamp(1.35rem,2.6vw,2.3rem); color: var(--plaster); }
+    .intent .cur { display: inline-block; width: 2px; height: 1em; background: var(--yellow); vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
     @keyframes blink { 50% { opacity: 0; } }
     .chain { display: flex; align-items: center; gap: var(--sp-s); flex-wrap: wrap; font-family: var(--mono); font-size: var(--t-label); letter-spacing: .08em; text-transform: uppercase; }
     .step { display: inline-flex; align-items: center; gap: .5em; padding: .55em .95em; border: 1px solid #ffffff22; border-radius: var(--r-pill); opacity: .28; transition: opacity .4s var(--ease), border-color .4s, background .4s; }
     .step .d { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-    .step.on { opacity: 1; border-color: var(--ochre); }
-    .step.done { opacity: 1; border-color: #fff; background: #ffffff10; }
+    .step.on { opacity: 1; border-color: var(--yellow); } .step.done { opacity: 1; border-color: var(--yellow-lt); background: #ffffff12; }
     .chain .s { opacity: .35; }
 
-    /* two doors */
     .paths { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-m); }
-    .path { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--sp-xl);
-      box-shadow: 0 24px 50px -34px color-mix(in srgb, var(--ink) 40%, transparent); }
-    .tag { display: inline-block; font-family: var(--mono); font-size: var(--t-label); font-weight: 500; letter-spacing: .12em;
-      text-transform: uppercase; padding: .4em .8em; border-radius: var(--r-pill); color: #fff; margin-bottom: var(--sp-m); }
-    .path--do .tag { background: var(--terra); } .path--offer .tag { background: var(--pine); }
-    .path h3 { font-family: var(--display); font-weight: 400; font-size: var(--t-head); line-height: 1.05; color: var(--ink); margin-bottom: var(--sp-s); }
-    .path p { color: var(--ink-soft); max-width: 42ch; margin-bottom: var(--sp-m); }
+    .path { border-radius: var(--r-lg); padding: var(--sp-xl); box-shadow: 0 24px 50px -34px color-mix(in srgb, var(--ink) 45%, transparent); }
+    .path--do { background: var(--purple); color: #F3E9FA; } .path--offer { background: var(--yellow); color: var(--ink); }
+    .tag { display: inline-block; font-family: var(--mono); font-size: var(--t-label); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: .4em .85em; border-radius: var(--r-pill); margin-bottom: var(--sp-m); }
+    .path--do .tag { background: #ffffff22; color: #fff; } .path--offer .tag { background: var(--ink); color: var(--yellow); }
+    .path h3 { font-family: var(--display); font-weight: 400; font-size: var(--t-head); line-height: 1.05; margin-bottom: var(--sp-s); }
+    .path--do h3 { color: #fff; } .path--offer h3 { color: var(--ink); }
+    .path p { max-width: 42ch; margin-bottom: var(--sp-m); opacity: .92; }
     .steps { list-style: none; display: flex; flex-direction: column; gap: var(--sp-s); }
     .steps li { display: flex; gap: var(--sp-s); align-items: baseline; font-size: var(--t-body); }
-    .steps .n { font-family: var(--mono); font-weight: 500; color: var(--terra); }
-    .path--offer .steps .n { color: var(--pine); }
+    .steps .n { font-family: var(--mono); font-weight: 500; }
+    .path--do .steps .n { color: var(--yellow-lt); } .path--offer .steps .n { color: var(--clay); }
 
-    /* verified band */
-    .band { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-l); align-items: center;
-      background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--sp-xl); }
-    .band .big { font-family: var(--display); font-size: var(--t-massive); line-height: .82; color: var(--terra); }
-    .band .big .x { color: var(--ochre); }
-    .band p { font-size: var(--t-sub); color: var(--ink); max-width: 40ch; line-height: 1.4; }
+    /* verified — bold purple color-block */
+    .band { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-l); align-items: center; background: var(--purple); color: #F3E9FA;
+      border-radius: var(--r-lg); padding: var(--sp-xl); box-shadow: 0 26px 56px -30px color-mix(in srgb, var(--purple) 70%, transparent); }
+    .band .big { font-family: var(--display); font-size: var(--t-massive); line-height: .82; color: var(--yellow); }
+    .band p { font-size: var(--t-sub); color: #F3E9FA; max-width: 40ch; line-height: 1.4; }
 
-    /* footer */
-    .footer { max-width: var(--maxw); margin-inline: auto; padding: var(--sp-xl) var(--gutter) var(--sp-l);
-      border-top: 1px solid var(--line-2); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--sp-m); }
+    .footer { max-width: var(--maxw); margin-inline: auto; padding: var(--sp-xl) var(--gutter) var(--sp-l); border-top: 1px solid var(--line-2);
+      display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--sp-m); }
     .footer .big { font-family: var(--display); font-size: var(--t-display); line-height: .95; color: var(--ink); }
-    .footer .big i { color: var(--terra); font-style: normal; }
+    .footer .big i { color: var(--purple); font-style: normal; }
     .footer .meta { text-align: right; font-family: var(--mono); font-size: var(--t-label); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
     .footer a { text-decoration: none; }
 
-    /* reveal */
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
     .reveal.vis { opacity: 1; transform: none; }
-
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; min-height: auto; padding-top: var(--sp-l); }
-      .bloom { margin-top: var(--sp-l); }
-      .paths { grid-template-columns: 1fr; }
-      .band { grid-template-columns: 1fr; }
-      .nav .nl { display: none; }
+      .door-art { margin-top: var(--sp-l); max-width: 360px; }
+      .paths { grid-template-columns: 1fr; } .band { grid-template-columns: 1fr; } .nav .nl { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
-      .reveal { opacity:1; transform:none; } .thread.hot { stroke-dashoffset: 0; }
+      .reveal { opacity:1; transform:none; } .thread.hot { stroke-dashoffset:0; } .petal { display:none; }
     }
   </style>
 </head>
@@ -206,11 +185,10 @@
     </nav>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <div>
       <p class="label reveal">The capability network</p>
-      <h1 class="reveal" style="margin-top:var(--sp-s);">Your agent can do <span class="t">real</span> things now<span class="dot">.</span></h1>
+      <h1 class="reveal" style="margin-top:var(--sp-s);">Your agent can do <span class="p">real</span> things now<span class="y">.</span></h1>
       <p class="sub reveal">Tell it what you want. It composes <b>verified real-world capabilities</b> — pizza to power tools to lab assays — and proves every step.</p>
       <div class="doors reveal">
         <a class="btn btn--do" href="#do">Do something <span class="arr">&rarr;</span></a>
@@ -218,45 +196,48 @@
       </div>
     </div>
 
-    <!-- warm capability bloom -->
+    <!-- THE DOORWAY (Oaxaca ref): walk through → your agent acts -->
     <div class="reveal">
-      <svg class="bloom" viewBox="0 0 400 400" role="img" aria-label="Warm threads of capability composing into one verified outcome">
+      <svg class="door-art" viewBox="0 0 360 460" role="img" aria-label="A glowing doorway with capabilities composing inside it">
         <defs>
-          <linearGradient id="warm" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#B8472A"/><stop offset="1" stop-color="#D98A2B"/>
+          <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FBE3A0"/><stop offset=".55" stop-color="#F7D27A"/><stop offset="1" stop-color="#F3E9D0"/>
           </linearGradient>
           <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            <feGaussianBlur stdDeviation="4.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
         </defs>
-        <!-- ambient curved threads -->
-        <path class="thread" d="M200,200 C150,150 120,110 90,80"/>
-        <path class="thread" d="M200,200 C250,150 300,120 330,84"/>
-        <path class="thread" d="M200,200 C300,210 340,220 358,250"/>
-        <path class="thread" d="M200,200 C160,270 140,300 116,330"/>
-        <path class="thread" d="M90,80 C200,60 280,60 330,84"/>
-        <path class="thread" d="M358,250 C260,300 180,320 116,330"/>
-        <!-- hot composition path -->
-        <path class="thread hot" style="--len:150;animation-delay:.2s"  d="M200,200 C150,150 120,110 90,80"/>
-        <path class="thread hot" style="--len:260;animation-delay:.9s"  d="M90,80 C200,60 280,60 330,84"/>
-        <path class="thread hot" style="--len:230;animation-delay:1.5s" d="M330,84 C360,150 360,210 358,250"/>
-        <!-- ambient nodes -->
-        <circle class="nd" cx="116" cy="330" r="9"/>
-        <!-- pulse + hot nodes -->
-        <circle class="ring" cx="200" cy="200"/>
-        <circle class="nd core glowing" cx="200" cy="200" r="13"/>
-        <circle class="nd glowing" cx="90" cy="80" r="10"/>
-        <circle class="nd glowing" cx="330" cy="84" r="10"/>
-        <circle class="nd amber glowing" cx="358" cy="250" r="11"/>
-        <text class="blbl" x="200" y="232" text-anchor="middle">agent</text>
-        <text class="blbl" x="90" y="62" text-anchor="middle">pizza</text>
-        <text class="blbl" x="330" y="66" text-anchor="middle">courier</text>
-        <text class="blbl" x="358" y="276" text-anchor="middle">verified</text>
+        <!-- purple jamb (the doorway frame) -->
+        <path class="jamb" d="M40,452 L40,180 A140,140 0 0 1 320,180 L320,452 Z"/>
+        <!-- sunlit opening -->
+        <path class="opening" d="M64,452 L64,184 A116,116 0 0 1 296,184 L296,452 Z"/>
+        <!-- capability bloom inside the doorway -->
+        <g transform="translate(0,8)">
+          <path class="thread" d="M180,300 C150,250 140,210 130,176"/>
+          <path class="thread" d="M180,300 C220,255 250,225 250,188"/>
+          <path class="thread" d="M180,300 C235,300 258,300 270,326"/>
+          <path class="thread" d="M180,300 C140,348 128,372 112,398"/>
+          <path class="thread hot" style="--len:150;animation-delay:.3s"  d="M180,300 C150,250 140,210 130,176"/>
+          <path class="thread hot" style="--len:170;animation-delay:1s"   d="M130,176 C180,150 220,156 250,188"/>
+          <path class="thread hot" style="--len:170;animation-delay:1.7s" d="M250,188 C272,232 272,288 270,326"/>
+          <circle class="ring" cx="180" cy="300"/>
+          <circle class="nd core glow" cx="180" cy="300" r="13"/>
+          <circle class="nd glow" cx="130" cy="176" r="10"/>
+          <circle class="nd glow" cx="250" cy="188" r="10"/>
+          <circle class="nd amber glow" cx="270" cy="326" r="11"/>
+          <text class="blbl" x="180" y="332" text-anchor="middle">agent</text>
+          <text class="blbl" x="130" y="160" text-anchor="middle">pizza</text>
+          <text class="blbl" x="250" y="172" text-anchor="middle">courier</text>
+          <text class="blbl" x="270" y="352" text-anchor="middle">verified</text>
+        </g>
+        <!-- jacaranda petals -->
+        <ellipse class="petal" cx="100" cy="70" rx="6" ry="9" style="--pd:6.5s"/>
+        <ellipse class="petal" cx="250" cy="50" rx="5" ry="8" style="--pd:8s; animation-delay:1.5s"/>
+        <ellipse class="petal" cx="300" cy="96" rx="6" ry="9" style="--pd:7s; animation-delay:3s"/>
       </svg>
     </div>
   </section>
 
-  <!-- LIVE DEMO -->
   <section class="wrap" style="padding-block:var(--sp-l);">
     <div class="demo reveal">
       <p class="label">Watch it compose — live</p>
@@ -271,9 +252,8 @@
     </div>
   </section>
 
-  <!-- TWO DOORS -->
   <section class="wrap" style="padding-top:var(--sp-l);">
-    <div class="head reveal"><h2>Two doors. Both simple.</h2><p class="label" style="color:var(--ink-soft)">No terminal required</p></div>
+    <div class="head reveal"><h2>Two doors. Both simple.</h2><p class="label">No terminal required</p></div>
     <div class="paths reveal">
       <div class="path path--do" id="do">
         <span class="tag">Do things</span>
@@ -298,10 +278,9 @@
     </div>
   </section>
 
-  <!-- VERIFIED -->
   <section class="wrap" style="padding-top:var(--sp-l);">
     <div class="band reveal">
-      <div class="big">100<span class="x">%</span></div>
+      <div class="big">100%</div>
       <p>Every action returns signed, independently-verifiable evidence. Composition you can trust — not just hope for.</p>
     </div>
   </section>
@@ -312,22 +291,17 @@
   </footer>
 
   <script>
-    const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
     const intents=['get a pizza to my door tonight','run this assay on 96 samples','print and ship this part by friday','a ride to SFO at 6am'];
     const out=document.getElementById('it'); let ii=0,ci=0,typ=true;
     (function tick(){const w=intents[ii];
       if(typ){out.textContent=w.slice(0,ci++); if(ci>w.length){typ=false;return setTimeout(tick,1900);} setTimeout(tick,45);}
       else{out.textContent=w.slice(0,ci--); if(ci<0){typ=true;ii=(ii+1)%intents.length;ci=0;return setTimeout(tick,220);} setTimeout(tick,22);}})();
-
     const steps=[...document.querySelectorAll('#chain .step')]; let si=0;
     setInterval(()=>{steps.forEach((s,i)=>{s.classList.toggle('on',i<=si);s.classList.toggle('done',i===steps.length-1&&si>=steps.length-1);});si=(si+1)%(steps.length+2);},700);
-
-    // DATA SPINE — page is a demand sensor. Wire your PostHog key to go live.
     const PCC={capture(ev,p){window.posthog?window.posthog.capture(ev,p):console.debug('[pcc:event]',ev,p||{});}};
     document.querySelectorAll('.btn').forEach(b=>b.addEventListener('click',()=>PCC.capture('door_click',{door:b.classList.contains('btn--do')?'do':'offer'})));
-    // TODO(owner): drop PostHog snippet + capture anonymous intents from a real input → demand-intelligence.
   </script>
 </body>
 </html>
