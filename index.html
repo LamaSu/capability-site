@@ -64,18 +64,20 @@
 
     /* ---- full-bleed image shots ---- */
     .shot { position: relative; overflow: hidden; isolation: isolate; }
-    .shot-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;
-      filter: url(#duo) contrast(1.06) brightness(.92); transform: scale(1.06); }
+    .shot-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -3;
+      filter: url(#duo) saturate(1.7) contrast(1.14) brightness(1.12); transform: scale(1.06); }
+    .shot-tint { position: absolute; inset: 0; z-index: -2; pointer-events: none; mix-blend-mode: overlay;
+      background: linear-gradient(120deg, rgba(124,58,196,.55), rgba(242,169,14,.30) 90%); }
     .shot.kb .shot-bg { animation: kb 26s ease-in-out infinite alternate; }
     @keyframes kb { from{ transform: scale(1.06) } to{ transform: scale(1.16) translateY(-1.5%) } }
     .shot-veil { position: absolute; inset: 0; z-index: -1; pointer-events: none;
       background:
-        linear-gradient(100deg, rgba(19,10,29,.92) 12%, rgba(19,10,29,.55) 48%, rgba(19,10,29,.30) 100%),
-        radial-gradient(120% 100% at 50% 100%, rgba(19,10,29,.85), transparent 60%),
-        linear-gradient(0deg, var(--bg), transparent 22%); }
+        linear-gradient(100deg, rgba(19,10,29,.80) 0%, rgba(19,10,29,.34) 44%, rgba(91,42,134,.06) 100%),
+        radial-gradient(120% 95% at 50% 100%, rgba(19,10,29,.6), transparent 64%),
+        linear-gradient(0deg, var(--bg), transparent 18%); }
     .shot-veil.center { background:
-        radial-gradient(110% 90% at 50% 50%, rgba(19,10,29,.45), rgba(19,10,29,.9) 100%),
-        linear-gradient(0deg, var(--bg), transparent 24%), linear-gradient(180deg, var(--bg), transparent 24%); }
+        radial-gradient(120% 95% at 50% 50%, transparent 30%, rgba(19,10,29,.82) 100%),
+        linear-gradient(0deg, var(--bg), transparent 22%), linear-gradient(180deg, rgba(19,10,29,.5), transparent 26%); }
 
     /* ---- TOP BAR ---- */
     .topbar { display: flex; align-items: center; justify-content: space-between; padding: var(--sp-m) var(--gutter);
@@ -128,7 +130,7 @@
     .paths { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-m); }
     .path { position: relative; overflow: hidden; border-radius: var(--r); padding: var(--sp-xl); border: 1px solid var(--line);
       min-height: 340px; display: flex; flex-direction: column; justify-content: flex-end; transition: transform .4s var(--ease), border-color .4s; isolation: isolate; }
-    .path .pbg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; filter: url(#duo) brightness(.8); transform: scale(1.05); transition: transform .6s var(--ease); }
+    .path .pbg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; filter: url(#duo) saturate(1.6) brightness(1.0); transform: scale(1.05); transition: transform .6s var(--ease); }
     .path .pveil { position: absolute; inset: 0; z-index: -1; }
     .path--do .pveil   { background: linear-gradient(0deg, rgba(19,10,29,.96) 12%, rgba(91,42,134,.5) 70%, rgba(19,10,29,.5)); }
     .path--offer .pveil{ background: linear-gradient(0deg, rgba(19,10,29,.96) 12%, rgba(242,169,14,.28) 78%, rgba(19,10,29,.55)); }
@@ -175,13 +177,14 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="duo" color-interpolation-filters="sRGB">
     <feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0 0 0 1 0"/>
     <feComponentTransfer>
-      <feFuncR tableValues="0.357 0.949"/><feFuncG tableValues="0.165 0.663"/><feFuncB tableValues="0.525 0.055"/>
+      <feFuncR tableValues="0.42 1.0"/><feFuncG tableValues="0.16 0.74"/><feFuncB tableValues="0.66 0.06"/>
     </feComponentTransfer>
   </filter></svg>
 
   <!-- HERO -->
   <section class="shot kb hero">
     <img class="shot-bg" src="assets/hand.jpg" alt="" />
+    <div class="shot-tint"></div>
     <div class="shot-veil"></div>
     <header class="topbar">
       <span class="brand">PCC<i>.</i></span>
@@ -252,6 +255,7 @@
   <!-- VERIFIED (full-bleed Mars) -->
   <section class="shot kb verify">
     <img class="shot-bg" src="assets/arm3.jpg" alt="" />
+    <div class="shot-tint"></div>
     <div class="shot-veil center"></div>
     <div class="verify-in reveal">
       <div class="big">100<span class="x">%</span></div>

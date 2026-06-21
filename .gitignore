@@ -10,6 +10,9 @@ dist/
 .env.*
 !.env.example
 
+# build/preview artifacts
+preview*.png
+
 # os / editor
 .DS_Store
 Thumbs.db
