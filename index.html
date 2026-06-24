@@ -152,6 +152,15 @@
     .verify .big .x { color: var(--purple-lt); }
     .verify p { font-size: var(--t-sub); color: var(--cream); max-width: 42ch; line-height: 1.5; text-shadow: 0 2px 24px rgba(0,0,0,.7); }
     .verify .label { margin-bottom: var(--sp-s); }
+    .proof { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; margin-top: var(--sp-m); }
+    .proof li { font-family: var(--mono); font-size: var(--t-label); letter-spacing: .05em; text-transform: uppercase; color: var(--cream);
+      border: 1px solid var(--line); border-radius: 100px; padding: .42em .9em; background: rgba(19,10,29,.5); backdrop-filter: blur(6px); display: inline-flex; align-items: center; gap: .5em; }
+    .proof .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 10px var(--yellow); animation: blink 2s steps(1) infinite; }
+    .prooflink, .demolink { display: inline-block; font-family: var(--mono); font-size: var(--t-label); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; }
+    .prooflink { margin-top: var(--sp-m); color: var(--yellow); border-bottom: 1px solid rgba(242,169,14,.45); padding-bottom: 2px; }
+    .prooflink:hover { color: var(--yellow-lt); }
+    .demolink { margin-top: var(--sp-m); color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+    .demolink:hover { color: var(--cream); }
 
     .footer { max-width: var(--maxw); margin-inline: auto; padding: var(--sp-xl) var(--gutter) var(--sp-l); border-top: 1px solid var(--line);
       display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--sp-m); }
@@ -183,7 +192,7 @@
 
   <!-- HERO -->
   <section class="shot kb hero">
-    <img class="shot-bg" src="assets/hand.jpg" alt="" />
+    <img class="shot-bg" src="assets/fact.jpg" alt="" />
     <div class="shot-tint"></div>
     <div class="shot-veil"></div>
     <header class="topbar">
@@ -209,7 +218,7 @@
   <!-- DEMO -->
   <section class="wrap">
     <div class="glass demo reveal">
-      <p class="label">Watch it compose — live</p>
+      <p class="label">How a request composes</p>
       <div class="intent"><span class="q"><span id="it"></span><span class="cur"></span></span></div>
       <div class="chain" id="chain">
         <span class="step on"><span class="d"></span> your agent</span><span class="s">&rarr;</span>
@@ -218,6 +227,7 @@
         <span class="step"><span class="d"></span> escrow</span><span class="s">&rarr;</span>
         <span class="step"><span class="d"></span> verified &check;</span>
       </div>
+      <a class="demolink" href="https://capability.network">Illustrative — real jobs settle on-chain at capability.network &rarr;</a>
     </div>
   </section>
 
@@ -238,7 +248,7 @@
         </ol>
       </article>
       <article class="path path--offer" id="offer">
-        <img class="pbg" src="assets/humanoid.jpg" alt="" />
+        <img class="pbg" src="assets/p3d.jpg" alt="" />
         <div class="pveil"></div>
         <span class="tag">For operators</span>
         <h3>Put it online. Keep what you earn.</h3>
@@ -254,14 +264,22 @@
 
   <!-- VERIFIED (full-bleed Mars) -->
   <section class="shot kb verify">
-    <img class="shot-bg" src="assets/arm3.jpg" alt="" />
+    <img class="shot-bg" src="assets/chip.jpg" alt="" />
     <div class="shot-tint"></div>
     <div class="shot-veil center"></div>
     <div class="verify-in reveal">
       <div class="big">100<span class="x">%</span></div>
       <div>
         <p class="label">Proof, not promises</p>
-        <p>Every action returns signed, independently-verifiable evidence — encrypted, stored on IPFS, anchored on-chain. An autonomous machine on the far side of the world, and you can still check every claim.</p>
+        <p>Every job returns signed, independently-verifiable evidence — encrypted, stored on IPFS, anchored on-chain. You don&rsquo;t trust the operator; you check the proof.</p>
+        <ul class="proof">
+          <li><span class="dot"></span> Live · capability.network</li>
+          <li>5 sponsor integrations</li>
+          <li>On-chain · Base Sepolia</li>
+          <li>218-tool agent package</li>
+          <li>x402 · USDC settlement</li>
+        </ul>
+        <a class="prooflink" href="https://capability.network">See it live · capability.network &rarr;</a>
       </div>
     </div>
   </section>
