@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PCC — your agent can do real things now</title>
   <meta name="description" content="AI agents discover, hire, and verify real-world capability. Cryptographic proof on every job. The capability network." />
+
+  <!-- ── Analytics: PostHog ───────────────────────────────────────────────
+       __PCC_POSTHOG_KEY is a PUBLIC client-side project key (starts with
+       "phc_") — safe to commit: it is write-only ingest and cannot read data.
+       Get it from PostHog -> Settings -> Project -> "Project API Key" (project
+       350545, US cloud). Until a real phc_ key is filled in, analytics stays
+       OFF and the page still works (PCC.capture falls back to console.debug).
+       Events flow to the same PostHog project the capability.network report
+       reads, so landing-page traffic shows up in scripts/daily-report.mjs. ── -->
+  <script>
+    window.__PCC_POSTHOG_KEY  = 'phc_HyYMiiJIEpF8X7W4OFmxN8bvzMWli2ovupgmAQgmUFn';
+    window.__PCC_POSTHOG_HOST = 'https://us.i.posthog.com';
+  </script>
+  <script>
+    (function () {
+      var key = window.__PCC_POSTHOG_KEY || '';
+      if (!/^phc_/.test(key) || key.indexOf('REPLACE') !== -1) {
+        console.debug('[pcc] PostHog key not set — analytics disabled.');
+        return;
+      }
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init(key, {
+        api_host: window.__PCC_POSTHOG_HOST,
+        person_profiles: 'identified_only',
+        capture_pageview: true,
+        capture_pageleave: true
+      });
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
